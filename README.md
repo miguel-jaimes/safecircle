@@ -32,9 +32,9 @@ payment ──► score_transaction()┘        │
 |---|---|
 | Message model (TF-IDF + Logistic Regression) | Precision 0.92, recall 0.94 on held-out test set |
 | Transaction model | _TBD_ |
-| Demo scenarios (Rosa, Walter, Linda) | _TBD_ / 3 correct |
+| Demo scenarios (Rosa, Walter, Linda) | 3 / 3 correct |
 | Redaction | 45 test messages, 0 private details leaked |
-| redact + explain speed | _TBD_ ms per message |
+| redact + explain speed | 0.047 ms per message (1,000 runs)|
 | Optional Granite explanation | ~10 s per message, runs fully on-server |
 
 ## How to run
