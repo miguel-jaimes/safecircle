@@ -2,7 +2,7 @@
 
 redact()  : hides private details before any text reaches a language model.
 explain() : plain-English explanation for the senior.
-            Default = template (instant, always accurate).
+            Default = template (instant, always accurate, advice matched to the scam type).
             Optional = IBM Granite running locally on LinuxONE (use_granite=True),
             with an automatic quality check that falls back to the template.
 """
@@ -13,6 +13,8 @@ import re
 # Family words are the scam clue, not private data, so we never hide them
 FAMILY_WORDS = {"Grandma", "Grandpa", "Grandmother", "Grandfather", "Nana", "Papa",
                 "Mom", "Dad", "Mother", "Father", "Sir", "Madam", "Customer"}
+# Titles are kept too ("Officer [NAME]"); only the name after them is hidden
+TITLE_WORDS = {"Dr", "Mr", "Mrs", "Ms", "Officer", "Agent", "Deputy", "Sgt"}
 
 # Names we know appear in our data
 KNOWN_NAMES = ["Rosa", "Walter", "Linda"]
@@ -37,8 +39,8 @@ def redact(text: str) -> str:
     text = TITLE_RE.sub(r"\1 [NAME]", text)   # "Dr. Patel" -> "Dr. [NAME]"
 
     def hide_name(match):
-        if match.group(2) in FAMILY_WORDS:
-            return match.group(0)             # keep "Hi Grandma"
+        if match.group(2) in FAMILY_WORDS or match.group(2) in TITLE_WORDS:
+            return match.group(0)             # keep "Hi Grandma" and "This is Officer"
         return f"{match.group(1)} [NAME]"     # "It's Tyler" -> "It's [NAME]"
     text = GREETING_RE.sub(hide_name, text)
 
@@ -59,6 +61,17 @@ def _join(items):
     return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
 
 
+def _advice(msg_reasons):
+    """Pick the safest next step for this type of scam."""
+    text = " ".join(msg_reasons).lower()
+    if any(w in text for w in ("family", "grandchild", "grandson", "granddaughter", "relative")):
+        return "Please call your family member at a number you already know before sending any money."
+    if any(w in text for w in ("account", "bank", "identity", "verify", "password", "pin")):
+        return ("Please call your bank using the number on the back of your card. "
+                "Real banks never ask you to verify your identity by text.")
+    return "Please call the person or company at a number you already know before sending any money."
+
+
 def template_explain(decision: dict) -> str:
     """Explanation built only from the decision. No AI model, so it can never make things up."""
     if decision.get("action") != "hold_and_alert":
@@ -75,8 +88,8 @@ def template_explain(decision: dict) -> str:
         parts.append("We paused this payment because it doesn't match your usual spending.")
     if pay_reasons:
         parts.append(f"The payment itself also looked unusual: {_join(pay_reasons)}.")
-    parts.append("These are common signs of a scam, so we let your trusted contact know. "
-                 "Please call them, or call the person at a number you already know, before sending any money.")
+    parts.append("These are common signs of a scam, so we let your trusted contact know.")
+    parts.append(_advice(msg_reasons))
     return " ".join(parts)
 
 
