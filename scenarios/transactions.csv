@@ -1,0 +1,4 @@
+user_id,txn_id,timestamp,amount,merchant,merchant_category,is_new_payee,expected_action
+rosa,t1,2026-10-17 10:25,1500.00,QuickMart Gift Cards,gift_card,1,hold_and_alert
+walter,t2,2026-10-17 11:00,42.00,CVS Pharmacy,pharmacy,0,allow
+linda,t3,2026-10-17 15:10,300.00,Wire to J. Smith,wire,1,hold_and_alert

@@ -1,0 +1,37 @@
+user_id,txn_id,timestamp,amount,merchant,merchant_category,is_new_payee
+linda,h30,2026-08-18 16:53,80.97,Target,retail,1
+linda,h36,2026-08-21 12:04,149.08,Oncor Electric,utilities,1
+linda,h29,2026-08-27 10:11,39.37,Target,retail,0
+linda,h26,2026-08-28 16:25,99.45,H-E-B,grocery,1
+linda,h31,2026-09-05 09:09,16.28,Chick-fil-A,restaurant,1
+linda,h28,2026-09-09 19:56,112.83,Oncor Electric,utilities,0
+linda,h35,2026-09-12 15:06,118.89,Oncor Electric,utilities,0
+linda,h25,2026-09-12 15:58,107.79,Target,retail,0
+linda,h32,2026-09-26 18:20,24.30,Chick-fil-A,restaurant,0
+linda,h33,2026-09-26 19:43,28.49,Walgreens,pharmacy,1
+linda,h27,2026-10-09 15:55,77.27,Target,retail,0
+linda,h34,2026-10-14 19:51,123.56,Oncor Electric,utilities,0
+rosa,h7,2026-08-20 17:54,15.73,Walgreens,pharmacy,1
+rosa,h2,2026-08-24 14:37,56.45,Atmos Energy,utilities,1
+rosa,h5,2026-08-25 12:40,70.69,Atmos Energy,utilities,0
+rosa,h1,2026-08-27 15:41,23.11,Olive Garden,restaurant,1
+rosa,h8,2026-08-27 17:07,36.42,Shell,gas,1
+rosa,h3,2026-08-31 09:05,65.84,Atmos Energy,utilities,0
+rosa,h4,2026-09-02 10:35,58.35,Kroger,grocery,1
+rosa,h12,2026-09-14 14:29,69.64,Atmos Energy,utilities,0
+rosa,h11,2026-09-23 09:39,46.33,Kroger,grocery,0
+rosa,h6,2026-09-23 18:25,37.73,Kroger,grocery,0
+rosa,h10,2026-09-27 12:23,57.44,Atmos Energy,utilities,0
+rosa,h9,2026-10-09 19:11,57.58,Atmos Energy,utilities,0
+walter,h24,2026-08-21 12:49,37.19,Exxon,gas,1
+walter,h21,2026-08-21 13:41,41.01,CVS Pharmacy,pharmacy,1
+walter,h20,2026-08-22 10:17,41.85,Exxon,gas,0
+walter,h14,2026-08-23 18:19,76.76,Tom Thumb,grocery,1
+walter,h16,2026-08-25 17:26,22.42,CVS Pharmacy,pharmacy,0
+walter,h17,2026-08-27 16:26,22.55,Home Depot,home,1
+walter,h22,2026-09-05 15:56,46.72,Exxon,gas,0
+walter,h19,2026-09-08 14:38,52.28,Home Depot,home,0
+walter,h13,2026-09-10 13:15,49.86,Exxon,gas,0
+walter,h23,2026-09-16 14:10,42.49,CVS Pharmacy,pharmacy,0
+walter,h15,2026-10-03 16:18,59.58,Home Depot,home,0
+walter,h18,2026-10-05 17:36,50.51,CVS Pharmacy,pharmacy,0

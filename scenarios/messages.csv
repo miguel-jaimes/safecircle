@@ -1,0 +1,4 @@
+user_id,msg_id,timestamp,sender,text,expected
+rosa,m1,2026-10-17 10:02,+1-555-0142,"Grandma it's me, I'm in trouble. Please buy gift cards and text me the codes. Don't tell Mom.",scam
+walter,m2,2026-10-17 09:15,CVS Pharmacy,Your prescription is ready for pickup.,normal
+linda,m3,2026-10-17 14:30,+1-555-0199,Your bank account is locked. Verify your identity at the link below.,scam
