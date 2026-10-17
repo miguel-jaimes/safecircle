@@ -1,0 +1,11 @@
+case_id,user_id,text,amount,merchant,merchant_category,is_new_payee,expected_action,why,timestamp
+k1,rosa,"Grandma, I'm at the store. Do you want me to pick up milk and bread for you?",48.2,Kroger,grocery,0,allow,real family text + normal grocery run,2026-10-17 15:00
+k2,walter,"Hi Dad, the pharmacy called. Your refill is ready whenever you want to grab it.",36.5,Walgreens,pharmacy,0,allow,"family text that sounds urgent, normal payment",2026-10-17 15:00
+k3,linda,Your new TV was delivered today. Thanks for shopping with us!,649.99,Best Buy,electronics,1,allow,"big purchase at a new store, no scam signs",2026-10-17 15:00
+k8,rosa,Your water bill is ready to view online.,41.75,City Water,utilities,1,allow,"new payee, but a normal bill",2026-10-17 15:00
+k9,linda,Security alert: we noticed an unusual login. Confirm your identity now or your card will be frozen.,23.4,Target,retail,0,allow,"scam text, but the payment itself is normal",2026-10-17 15:00
+k4,rosa,"Grandma please don't tell Mom, I crashed the car and need $2,000 for the lawyer today. Send it through Western Union.",2000.0,Western Union,wire,1,hold_and_alert,"grandparent scam, wire instead of gift cards",2026-10-17 15:00
+k5,walter,Microsoft Support: your computer is infected and your bank account is at risk. Buy Google Play cards to fix it.,300.0,Google Play,gift_card,1,hold_and_alert,tech-support scam,2026-10-17 15:00
+k6,linda,"Congratulations! You won a $5,000 prize. Pay the $50 processing fee with gift cards to claim it.",50.0,Target Gift Cards,gift_card,1,hold_and_alert,prize scam with a SMALL amount,2026-10-17 15:00
+k7,walter,See you at church on Sunday!,1800.0,Crypto ATM,wire,1,hold_and_alert,"no scam text, but a very unusual risky payment",2026-10-17 15:00
+k10,walter,"My love, I need $900 for my visa so I can finally come see you. Please send it today, it's urgent.",900.0,Zelle to M. Brooks,wire,1,hold_and_alert,romance scam,2026-10-17 15:00
