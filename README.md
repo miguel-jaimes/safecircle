@@ -36,6 +36,8 @@ payment ──► score_transaction()┘        │
 | Redaction | 45 test messages, 0 private details leaked |
 | redact + explain speed | 0.047 ms per message (1,000 runs)|
 | Optional Granite explanation | ~10 s per message, runs fully on-server |
+| Tricky test set (10 hand-made edge cases) | 7 / 10 → 10 / 10 after fixes |
+| Holdout set (4 cases never used for tuning) | 4 / 4 |
 
 ## How to run
 1. Open JupyterLab on the LinuxONE server.

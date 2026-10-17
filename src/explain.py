@@ -55,29 +55,35 @@ def redact(text: str) -> str:
 # payment reasons are short labels ("new payee", "gift-card merchant").
 VERB_STARTS = ("asks", "claims", "says", "uses", "mentions", "pretends", "tells", "threatens", "offers", "promises")
 
+# Whole-word matches only (so "mom" doesn't match "moment")
+FAMILY_SCAM_RE = re.compile(r"\b(grandma|grandpa|grandmother|grandfather|grandson|granddaughter|grandchild|"
+                            r"nana|papa|mom|dad|nephew|niece|family|relative)\b")
+ACCOUNT_SCAM_RE = re.compile(r"\b(account|bank|identity|verify|password|pin)\b")
+
 
 def _join(items):
     items = list(items)
     return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1]
 
 
-def _advice(msg_reasons):
-    """Pick the safest next step for this type of scam."""
-    text = " ".join(msg_reasons).lower()
-    if any(w in text for w in ("family", "grandchild", "grandson", "granddaughter", "relative")):
+def _advice(msg_reasons, redacted_text=""):
+    """Pick the safest next step for this type of scam, using the reasons AND the (redacted) message."""
+    text = (" ".join(msg_reasons) + " " + redacted_text).lower()
+    if FAMILY_SCAM_RE.search(text):
         return "Please call your family member at a number you already know before sending any money."
-    if any(w in text for w in ("account", "bank", "identity", "verify", "password", "pin")):
+    if ACCOUNT_SCAM_RE.search(text):
         return ("Please call your bank using the number on the back of your card. "
                 "Real banks never ask you to verify your identity by text.")
     return "Please call the person or company at a number you already know before sending any money."
 
 
-def template_explain(decision: dict) -> str:
+def template_explain(decision: dict, redacted_text: str = "") -> str:
     """Explanation built only from the decision. No AI model, so it can never make things up."""
     if decision.get("action") != "hold_and_alert":
         return "This payment looks normal for you, so it went through. No action is needed."
 
-    reasons = [r for r in decision.get("reasons", []) if not r.startswith("uses the word")]
+    reasons = [r for r in decision.get("reasons", [])
+               if not r.startswith("uses the word") and not r.startswith("rule:")]
     msg_reasons = [r for r in reasons if r.startswith(VERB_STARTS)][:3]
     pay_reasons = [r for r in reasons if not r.startswith(VERB_STARTS)][:3]
 
@@ -89,7 +95,7 @@ def template_explain(decision: dict) -> str:
     if pay_reasons:
         parts.append(f"The payment itself also looked unusual: {_join(pay_reasons)}.")
     parts.append("These are common signs of a scam, so we let your trusted contact know.")
-    parts.append(_advice(msg_reasons))
+    parts.append(_advice(msg_reasons, redacted_text))
     return " ".join(parts)
 
 
@@ -139,11 +145,11 @@ def _looks_ok(text: str, decision: dict) -> bool:
 def explain(redacted_text: str, decision: dict, use_granite: bool = False) -> str:
     """Return 2-3 plain-English sentences the senior can understand."""
     if decision.get("action") != "hold_and_alert" or not use_granite:
-        return template_explain(decision)
+        return template_explain(decision, redacted_text)
     try:
         text = granite_explain(redacted_text, decision)
         if _looks_ok(text, decision):
             return text
     except Exception:
         pass                                        # any Granite problem -> safe template
-    return template_explain(decision)
+    return template_explain(decision, redacted_text)

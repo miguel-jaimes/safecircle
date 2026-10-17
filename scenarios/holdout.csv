@@ -1,0 +1,5 @@
+case_id,user_id,text,amount,merchant,merchant_category,is_new_payee,expected_action,why,timestamp
+k11,linda,Your Uber is arriving in 3 minutes. Look for a gray Toyota.,14.25,Uber,transport,0,allow,"normal ride, normal charge",2026-10-17 15:00
+k12,rosa,"Hi Grandma! Thanks for the birthday card, I loved it. Talk soon!",62.1,Walgreens,pharmacy,0,allow,"real grandchild text, normal purchase",2026-10-17 15:00
+k13,walter,This is the Sheriff's office. You missed jury duty and must pay a $400 fine today with gift cards to avoid arrest.,400.0,Best Buy Gift Cards,gift_card,1,hold_and_alert,government-impersonation scam,2026-10-17 15:00
+k14,linda,"Hey it's Pastor Mike, I need a favor. Can you buy four $100 Apple gift cards for a church member in need? I'll pay you back Sunday.",400.0,Apple Gift Cards,gift_card,1,hold_and_alert,trusted-person impersonation scam,2026-10-17 15:00
