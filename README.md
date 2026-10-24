@@ -3,6 +3,14 @@
 **Real-time scam interception for older adults, running entirely on IBM LinuxONE.**
 IBM Z Datathon 2026 · Theme: Real-Time AI for Critical Decisions
 
+🎥 **Demo video (3 min):** [Watch on Google Drive](https://drive.google.com/file/d/100sAdaLQy-0ZlY0jEYrAmtnPTJv5vbaH/view?usp=sharing)
+
+## My role: Miguel Jaimes (team lead)
+- **Led the team:** split the work into parallel roles so four people (one remote) could build at the same time; set up the LinuxONE server, the repo and the checkpoints.
+- **Privacy & explanations:** built `redact()` to hide names, phone numbers, cards and addresses (45 test messages, 0 leaks) and `explain()` for plain-English reasons (0.047 ms). Tested IBM Granite on the server and chose a verified template as the default, since wrong advice to a senior is worse than plain advice.
+- **Testing:** built a tricky edge-case set (7/10 → 10/10 after fixes) and a 4-case holdout never used for tuning (4/4).
+- **IBM Z evidence:** captured the s390x / NNPA platform proof and speed results on LinuxONE.
+
 ## The problem
 Americans aged 60+ reported **$7.7 billion** in internet-crime losses in 2025 ([FBI/FTC via AARP](https://www.aarp.org/money/scams-fraud/fbi-ftc-report-2025-losses)).
 Scams like the "grandparent scam" create urgency so money moves before anyone can step in.
